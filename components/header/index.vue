@@ -17,6 +17,9 @@
             text
           ) {{ link.title }}
 
+          v-btn(to="/user" icon nuxt)
+            v-icon(color="white" size="34") mdi-account-circle
+
 </template>
 
 <script>
@@ -30,10 +33,14 @@ export default {
 <style lang="scss" scoped>
 header {
   position: relative;
-  height: 64px;
+  height: 64px !important;
   background: transparent !important;
   transition: all 0.4s linear;
   backdrop-filter: saturate(180%) blur(20px) !important;
+
+  .v-toolbar__content {
+    height: 64px !important;
+  }
 
   &::after {
     content: ' ';
