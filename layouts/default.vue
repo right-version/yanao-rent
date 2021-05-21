@@ -1,12 +1,21 @@
 <template lang="pug">
   v-app
-    nuxt
+    HeaderDrawer(v-model="drawer")
+    Header(@clickBurger="drawer = true")
+
+    v-main
+      nuxt
+
+    Footer
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      drawer: false,
+    }
   },
-};
+}
 </script>
+

@@ -1,5 +1,8 @@
 <template lang="pug">
-  h1 asfasd
+  div
+    v-container
+      h1 asfasd
+
 </template>
 
 <script>
