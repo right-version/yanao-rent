@@ -117,7 +117,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-tabs-slider-wrapper {
-  top: 0;
-}
+
 </style>
