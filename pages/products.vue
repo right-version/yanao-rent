@@ -1,8 +1,8 @@
 <template lang="pug">
   v-container
-    v-tabs(right)
-      v-tab.right Списком
-      v-tab.right На карте
+    v-tabs
+      v-tab Списком
+      v-tab На карте
 
       v-tab-item.mt-5.mb-5.ml-1(transition="fade-transition")
         v-row
@@ -83,15 +83,16 @@ export default {
       items: ['По популярности', 'По цене'],
       panels: [1, 2],
       search: '',
+      copy: [],
     }
   },
   computed: {
     formatProducts() {
-      let copy = JSON.parse(JSON.stringify(this.products))
+      this.copy = JSON.parse(JSON.stringify(this.products))
 
       // Поиск
       if (this.search.trim()) {
-        copy = copy.filter((el) => {
+        this.copy = this.copy.filter((el) => {
           return (el.title + ' ' + el.distributor)
             .toLowerCase()
             .includes(this.search.toLowerCase().trim())
@@ -100,23 +101,23 @@ export default {
 
       // Сортировка
       if (this.selectedItem === 'По популярности') {
-        copy = copy.sort((a, b) => {
+        this.copy = this.copy.sort((a, b) => {
           return b.price - a.price
         })
       } else {
-        copy = copy.sort((a, b) => {
+        this.copy = this.copy.sort((a, b) => {
           return a.price - b.price
         })
       }
 
-      return copy
+      return this.copy
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.right {
-  justify-self: flex-end;
+.v-tabs-slider-wrapper {
+  top: 0;
 }
 </style>
