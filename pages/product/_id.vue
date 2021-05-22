@@ -42,7 +42,8 @@
                 a(:href="'tel:' + product.distributor.phone" ) {{ product.distributor.phone }}
 
     v-container
-      h1 Отзывы
+      h1.mb-4 Отзывы
+      Comments
 
 
 </template>
