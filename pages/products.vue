@@ -1,8 +1,8 @@
 <template lang="pug">
   v-container
     v-tabs(right)
-      v-tab Списком
-      v-tab На карте
+      v-tab.right Списком
+      v-tab.right На карте
 
       v-tab-item.mt-5.mb-5.ml-1(transition="fade-transition")
         v-row
@@ -90,11 +90,11 @@ export default {
       let copy = JSON.parse(JSON.stringify(this.products))
 
       // Поиск
-      if (this.search) {
+      if (this.search.trim()) {
         copy = copy.filter((el) => {
           return (el.title + ' ' + el.distributor)
             .toLowerCase()
-            .includes(this.search.toLowerCase())
+            .includes(this.search.toLowerCase().trim())
         })
       }
 
@@ -114,3 +114,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.right {
+  justify-self: flex-end;
+}
+</style>

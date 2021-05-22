@@ -70,19 +70,19 @@ v-container
         v-row
           v-col
             v-text-field(
-              ref="timeHour"
-              v-model="form.timeHour"
+              ref="min_hours"
+              v-model="form.min_hours"
               label="Минимальное время аренды (часов)"
-              :rules="[() => !!form.timeHour || 'Это поле не может быть пустым']"
+              :rules="[() => !!form.min_hours || 'Это поле не может быть пустым']"
               type="number"
               outlined
               required)
           v-col
             v-text-field(
-              ref="timeMinute"
-              v-model="form.timeMinute"
+              ref="min_minutes"
+              v-model="form.min_minutes"
               label="Минимальное время аренды (минут)"
-              :rules="[() => !!form.timeMinute || 'Это поле не может быть пустым']"
+              :rules="[() => !!form.min_minutes || 'Это поле не может быть пустым']"
               type="number"
               outlined
               required)
@@ -158,8 +158,8 @@ export default {
       description: '',
       price: '',
       amount: '',
-      timeHour: '1',
-      timeMinute: '0',
+      min_hours: '1',
+      min_minutes: '0',
       pledge: '',
       photos: [],
     },
@@ -167,7 +167,7 @@ export default {
   }),
   computed: {
     time() {
-      return this.form.timeHour + ':' + this.form.timeMinute
+      return this.form.min_hours + ':' + this.form.min_minutes
     },
   },
   methods: {
@@ -205,7 +205,7 @@ export default {
           )
           break
         case 2:
-          this.validate(['price', 'amount', 'timeHour', 'timeMinute'], index)
+          this.validate(['price', 'amount', 'min_hours', 'min_minutes'], index)
           break
         case 3:
           this.validate(['photos'], index)
