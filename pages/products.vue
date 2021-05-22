@@ -62,7 +62,7 @@
               p.ml-3(v-if="formatProducts.length === 0") Ничего не найдено 😢
 
       v-tab-item.mt-5
-        GoogleMap
+        GoogleMap(:dist="dist" @click="distSelected = id")
 
 </template>
 
@@ -71,12 +71,14 @@ import api from '~/assets/js/api'
 export default {
   async asyncData({ $axios }) {
     let products = []
+    let dist = []
     try {
       products = await api.getProduct($axios)
+      dist = await api.getDistributors($axios)
     } catch (e) {
       console.error(e)
     }
-    return { products }
+    return { products, dist }
   },
   data() {
     return {
@@ -85,6 +87,8 @@ export default {
       panels: [1, 2],
       search: '',
       copy: [],
+
+      distSelected: null,
     }
   },
   computed: {

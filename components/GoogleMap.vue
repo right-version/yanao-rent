@@ -1,7 +1,7 @@
 <template lang="pug">
   .map-wrapper
     v-row
-      v-col(cols="4")
+      v-col(cols="5")
         v-autocomplete(
           v-model="location"
           @update:search-input="searchInput"
@@ -13,7 +13,17 @@
           outlined
           required)
 
-      v-col(cols="8")
+        CardDist(
+          v-if="card"
+          :id="card.el.id"
+          :title="card.el.title"
+          :photo="card.el.photo"
+          :adress="card.address"
+          :url="card.el.url"
+          @click="$emit('click', id)"
+        )
+
+      v-col(cols="7")
         #gmap
 </template>
 
@@ -32,6 +42,7 @@ export default {
       ],
     }
   },
+  props: ['dist'],
   data() {
     return {
       sessionToken: null,
@@ -41,6 +52,8 @@ export default {
       marker: null,
       location: '',
       searchResults: [],
+
+      card: null,
     }
   },
   mounted() {
@@ -71,12 +84,29 @@ export default {
       )
       const polyOptions = {
         path: myCoordinates,
-        strokeColor: '#FF0000',
+        strokeColor: '#ad1457',
         strokeOpacity: 0.7,
         strokeWeight: 2,
       }
       const it = new google.maps.Polyline(polyOptions)
       it.setMap(this.map)
+
+      const setEvent = (marker, address, el) => {
+        marker.addListener('click', () => {
+          this.card = { address, el }
+        })
+      }
+
+      this.dist.forEach((el) => {
+        const { address, coords } = JSON.parse(el.coordinate)
+        const marker = new google.maps.Marker({
+          map: this.map,
+          animation: google.maps.Animation.DROP,
+          position: coords,
+        })
+
+        setEvent(marker, address, el)
+      })
     },
     displaySuggestions(predictions, status) {
       if (status !== window.google.maps.places.PlacesServiceStatus.OK) {
@@ -92,6 +122,9 @@ export default {
         if (status === 'OK') {
           const geometry = results[0].geometry
           const bounds = new google.maps.LatLngBounds()
+
+          console.log(this.getStringData(results))
+
           this.marker.setPosition(geometry.location)
           if (geometry.viewport) {
             bounds.union(geometry.viewport)
@@ -113,13 +146,20 @@ export default {
         )
       }
     },
+    getStringData(results) {
+      const data = {
+        address: results[0].formatted_address,
+        coords: results[0].geometry.location,
+      }
+      return JSON.stringify(data)
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
 #gmap {
-  height: 600px;
+  height: 500px;
   width: 100%;
 }
 </style>
