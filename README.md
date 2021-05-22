@@ -1,20 +1,42 @@
-# yanao-rent
+ЯНАО Шеринг
+=============================
+Данное веб приложение - это открытое демо, демонстрирующее решение кейса. 
 
-## Build Setup
-
-```bash
-# install dependencies
+ЛОКАЛЬНОЕ РАЗВЕРТЫВАНИЕ ПРОЕКТА
+-------------------------------
+Для развертывания проекта вам понадобится Node js 14+ версии(https://nodejs.org/en/)
+Для установки зависимотей воспользуйтесь одним из менеджеров пакетов npm или yarn.
+Мы рекоммендуем использовать yarn (https://yarnpkg.com/). Для его установки используйте:
+```
+$ npm install -g yarn
+```
+далее
+```
 $ yarn install
+```
 
-# serve with hot reload at localhost:3000
+Для локального развертывания используйте
+> serve with hot reload at localhost:3000
+```
 $ yarn dev
+```
 
-# build for production and launch server
+Для билда приложения на продакшене воспользуйтесь
+> build for production and launch server
+```
 $ yarn build
 $ yarn start
+```
 
-# generate static project
+Если у вас нет возможности развернуть сервер nuxt. Сбилдите статику
+> generate static project
+```
 $ yarn generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+ЧТО ДАЛЬШЕ
+-----------
+- Доработка UX/UI
+
+
+UPPERCASE
