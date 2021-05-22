@@ -36,39 +36,46 @@
             v-divider
             v-row.mt-4.align-center
               v-col(v-for="(product, index) in formatProducts" :key="'product-' + index" cols=4)
-                nuxt-link(:to="`/product/${product.id}`")
-                  v-hover(v-slot="{ hover }")
-                    v-card(flat :elevation="hover ? 3 : 0")
-                      v-img(
-                        :src="'https://vktrpnzrv.fvds.ru' + product.photo"
-                        height="200px")
-                      v-card-title {{ product.title }}
-                      v-card-subtitle {{ product.distributor}}
-                      v-card-subtitle 5к
-                      v-rating(
-                        :value="4"
-                        background-color="orange lighten-3"
-                        color="orange")
+                CardProduct(
+                  :id="product.id"
+                  :photo="product.photo"
+                  :title="product.title"
+                  :distributor="product.distributor"
+                  :rating="4"
+                  :price="product.price"
+                  :min_hours="product.min_hours"
+                  :min_minutes="product.min_minutes"
+                  :amount="product.amount"
+                  :pledge="product.pledge"
+                )
 
       v-tab-item.mt-5(transition="fade-transition")
 
 </template>
 
 <script>
+import api from '~/assets/js/api'
 export default {
-  async asyncData({ $axios }) {},
+  async asyncData({ $axios }) {
+    let products = []
+    try {
+      products = await api.getProduct($axios)
+    } catch (e) {
+      console.error(e)
+    }
+    return { products }
+  },
   data() {
     return {
       selectedItem: 'По популярности',
       items: ['По популярности', 'По цене'],
       panels: [1, 2],
       search: '',
-      products: [],
     }
   },
   computed: {
     formatProducts() {
-      return []
+      return this.products
     },
   },
 }
