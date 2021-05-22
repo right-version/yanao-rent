@@ -4,7 +4,7 @@
   v-hover(v-slot="{ hover }")
     v-card(flat tile :class="{'hover-card': hover, 'no-amount': !amount}" outlined)
       .image-wrap
-        v-img.image(:src="'https://vktrpnzrv.fvds.ru' + photo" height="200px" :class="{hover}")
+        v-img(v-if="photo").image(:src="'https://vktrpnzrv.fvds.ru' + photo" height="200px" :class="{hover}")
       
 
       v-card-title.title {{ title }}
@@ -65,6 +65,7 @@ export default {
 
   .image-wrap {
     overflow: hidden;
+    height: 200px;
 
     .image {
       transition: all 0.3s;

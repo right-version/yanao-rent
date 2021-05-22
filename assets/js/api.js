@@ -7,5 +7,12 @@ export default {
   },
   postProduct(axios, data) {
     return axios.$post('/product/', data)
+  },
+
+  getCategories(axios) {
+    return axios.$get('/category/')
+  },
+  getDistributors(axios) {
+    return axios.$get('/distributor/')
   }
 }
