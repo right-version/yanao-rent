@@ -101,8 +101,8 @@ export default {
       withoutPledge: false,
 
       tabs: 0,
-      selectedItem: 'По популярности',
-      items: ['По популярности', 'По цене'],
+      selectedItem: 'Без сортировки',
+      items: ['Без сортировки', 'По цене'],
       panels: [1, 2],
       search: '',
       copy: [],
@@ -151,13 +151,10 @@ export default {
       }
 
       // Сортировка
-      if (this.selectedItem === 'По популярности') {
-        this.copy = this.copy.sort((a, b) => {
-          return b.price - a.price
-        })
+      if (this.selectedItem === 'Без сортировки') {
       } else {
         this.copy = this.copy.sort((a, b) => {
-          return a.price - b.price
+          return b.price - a.price
         })
       }
 

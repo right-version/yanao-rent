@@ -25,5 +25,8 @@ export default {
   },
   postEvent(axios, data) {
     return axios.$post('/event/', data)
+  },
+  getEventById(axios, id) {
+    return axios.$get(`/event/${id}`)
   }
 }

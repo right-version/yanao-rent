@@ -21,7 +21,7 @@
               :price="product.price"
             )
 
-      h1.mt-4 Описание
+      h1.mt-8 Описание
       div.mt-2.desc {{ product.description || 'Описание товара' }}
 
     .banner
@@ -41,8 +41,13 @@
               p
                 a(:href="'tel:' + product.distributor.phone" ) {{ product.distributor.phone }}
 
+    
+
     v-container
-      h1.mb-4 Отзывы
+      h1.mb-8 На карте
+      GoogleMapMarker(:coords="coords")
+
+      h1.mt-8.mb-8 Отзывы
       Comments
 
 
@@ -71,6 +76,14 @@ export default {
       } catch (error) {}
 
       return x.address
+    },
+    coords() {
+      let x = ''
+      try {
+        x = JSON.parse(this.product.distributor.coordinate)
+      } catch (error) {}
+
+      return x.coords
     },
   },
 }
