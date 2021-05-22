@@ -20,7 +20,8 @@
           :photo="card.el.photo"
           :adress="card.address"
           :url="card.el.url"
-          @click="$emit('click', id)"
+          :phone="card.el.phone"
+          @click="$emit('click', $event)"
         )
 
       v-col(cols="7")
