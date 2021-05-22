@@ -1,4 +1,8 @@
 export default {
+  signup(axios, data) {
+    return axios.$post('/auth/register/', data)
+  },
+
   getProduct(axios) {
     return axios.$get('/product/')
   },

@@ -34,12 +34,38 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://vktrpnzrv.fvds.ru/api/v1'
+    baseURL: 'https://vktrpnzrv.fvds.ru/api/v1',
+    credentials: true
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          required: true,
+          maxAge: 1800,
+          type: 'jwt'
+        },
+        user: {
+          property: false
+        },
+        endpoints: {
+          login: { url: '/auth/login/', method: 'post' },
+          user: { url: '', method: 'get' }
+        }
+      }
+    },
+    redirect: {
+      login: '/'
+    },
+    // Can work without localStorage !
+    localStorage: false
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -49,7 +75,7 @@ export default {
       dark: false,
       themes: {
         light: {
-          primary: '#f06292'
+          primary: '#00bcd4'
         },
         dark: {
           primary: colors.blue.darken2,

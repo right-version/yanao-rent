@@ -17,8 +17,7 @@
             text
           ) {{ link.title }}
 
-          v-btn(to="/user" icon nuxt)
-            v-icon(color="white" size="34") mdi-account-circle
+          AuthModal
 
 </template>
 
