@@ -118,14 +118,7 @@ v-container
 import api from '~/assets/js/api'
 import { border } from '~/assets/js/border'
 import { toBase64 } from '~/assets/js/helpers'
-function strEncodeUTF8(str) {
-  var buf = new ArrayBuffer(str.length * 2)
-  var bufView = new Uint8Array(buf)
-  for (var i = 0, strLen = str.length; i < strLen; i++) {
-    bufView[i] = str.charCodeAt(i)
-  }
-  return bufView
-}
+
 export default {
   head() {
     return {
@@ -255,10 +248,7 @@ export default {
       for (const field in this.form) {
         if (['place'].includes(field)) {
           console.log(JSON.stringify(this.form[field]))
-          formData.append(
-            'coordinates',
-            strEncodeUTF8(JSON.stringify(this.form[field]))
-          )
+          formData.append('coordinates', JSON.stringify(this.form[field]))
           continue
         }
         if (['photos'].includes(field)) {

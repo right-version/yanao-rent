@@ -1,5 +1,5 @@
 export const mainLinks = [
   { title: 'Прокат', to: '/products' },
-  { title: 'Досуг', to: '#' },
-  { title: 'Бизнесу', to: '#' }
+  { title: 'События', to: '/events' },
+  { title: 'Бизнесу', to: '/business' }
 ]
