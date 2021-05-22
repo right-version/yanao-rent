@@ -29,6 +29,7 @@
           small Нет аккаунта?
             a
               strong.register(@click="toRegister") &nbsp;Зарегестрируйтесь
+        v-divider
         v-card-actions
           v-spacer
           v-btn(text @click="dialog = false")
@@ -80,6 +81,7 @@
           small Уже есть аккаунт?
             a
               strong.register(@click="toRegister") &nbsp;Вход
+        v-divider
         v-card-actions
           v-spacer
           v-btn(text @click="dialog = false")

@@ -17,7 +17,10 @@ v-container
 
 
         .d-flex.mt-4.button.ml-4
-          v-btn(color="#00bcd4" tile elevation=0) Забронировать
+          RentModal(
+            :id="product.id"
+            :price="product.price"
+          )
 
     h1.mt-4 Описание
     div.mt-2.desc {{ product.description || 'Описание товара' }}
@@ -51,6 +54,10 @@ export default {
     .h-200 {
       height: 300px;
     }
+  }
+
+  .button {
+    align-self: flex-start;
   }
 
   .pledge {

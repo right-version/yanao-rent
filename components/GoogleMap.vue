@@ -125,7 +125,7 @@ export default {
 
           console.log(this.getStringData(results))
 
-          this.marker.setPosition(geometry.location)
+          // this.marker.setPosition(geometry.location)
           if (geometry.viewport) {
             bounds.union(geometry.viewport)
           } else {
