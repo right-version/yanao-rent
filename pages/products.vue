@@ -4,7 +4,7 @@
       v-tab Списком
       v-tab На карте
 
-      v-tab-item.mt-5.mb-5.ml-1(transition="fade-transition")
+      v-tab-item.mt-5.mb-5.ml-1
         v-row
           v-col(cols=3)
             v-card.py-3(elevation=3)
@@ -61,7 +61,8 @@
                 )
               p.ml-3(v-if="formatProducts.length === 0") Ничего не найдено 😢
 
-      v-tab-item.mt-5(transition="fade-transition")
+      v-tab-item.mt-5
+        GoogleMap
 
 </template>
 
@@ -117,5 +118,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>
