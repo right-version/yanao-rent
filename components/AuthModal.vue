@@ -1,10 +1,10 @@
 <template lang="pug">
-  v-row(justify="center")
+  v-row.auth-modal(justify="center")
     v-dialog(v-model="dialog" persistent max-width="500px")
       template(v-slot:activator="{ on, attrs }")
-        v-btn(to="/user" icon nuxt v-bind="attrs" v-on="on")
+        v-btn(icon v-bind="attrs" v-on="on")
           v-icon(color="white" size="34") mdi-account-circle
-      v-card(v-if="!registartion")
+      v-card(v-if="!registartion ")
         v-card-title Вход
         v-card-text
           v-container
@@ -27,7 +27,8 @@
                 )
 
           small Нет аккаунта?
-            strong.register(@click="toRegister") &nbsp;Зарегестрируйтесь
+            a
+              strong.register(@click="toRegister") &nbsp;Зарегестрируйтесь
         v-card-actions
           v-spacer
           v-btn(text @click="dialog = false")
@@ -70,9 +71,15 @@
                   type="password"
                   required
                 )
+                v-checkbox.checkbox(
+                  v-model="form2.checkbox"
+                  color="#f06292"
+                  label="Условия политики конфеденциальности"
+                  :error-messages="form2Error.checkbox")
 
           small Уже есть аккаунт?
-            strong.register(@click="toRegister") &nbsp;Вход
+            a
+              strong.register(@click="toRegister") &nbsp;Вход
         v-card-actions
           v-spacer
           v-btn(text @click="dialog = false")
@@ -102,17 +109,28 @@ export default {
       password: '',
       username: '',
       password2: '',
+      checkbox: false,
     },
     form2Error: {
       email: [],
       password: [],
       username: [],
       password2: [],
+      checkbox: [],
     },
   }),
   computed: {
     loggedIn() {
-      return this.$auth.loggedIn
+      return this.$auth.user
+    },
+  },
+  watch: {
+    dialog(value) {
+      console.log(value, this.user)
+      if (value && this.user) {
+        this.dialog = false
+        this.$router.push('/user/overview')
+      }
     },
   },
   methods: {
@@ -122,7 +140,8 @@ export default {
           .loginWith('local', { data: this.form })
           .then((response) => {
             this.$auth.setUserToken(response.data.tokens.access)
-            this.$router.push('/user')
+            this.$auth.setUser(response.data)
+            this.$router.push('/user/overview')
             this.dialog = false
           })
           .catch((e) => {
@@ -136,6 +155,12 @@ export default {
           this.form2Error.password2 = ['Пароли не совпадают']
           return
         }
+        if (!this.form2.checkbox) {
+          this.form2Error.checkbox = [
+            'Приймите условия политики конфеденциальности',
+          ]
+          return
+        }
         api
           .signup(this.$axios, {
             username: this.form2.username,
@@ -145,8 +170,20 @@ export default {
           .then((response) => {
             console.log(response)
             this.$auth.setUserToken(response.data.tokens.access)
-            this.$router.push('/user')
-            this.dialog = false
+
+            this.$auth
+              .loginWith('local', {
+                data: {
+                  email: this.form2.email,
+                  password: this.form2.password,
+                },
+              })
+              .then((response) => {
+                this.$auth.setUserToken(response.data.tokens.access)
+                this.$auth.setUser(response.data)
+                this.$router.push('/user/overview')
+                this.dialog = false
+              })
           })
           .catch((e) => {
             this.form2Error = e.response.data
@@ -162,9 +199,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.register {
-  cursor: pointer;
-}
-</style>

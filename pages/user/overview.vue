@@ -8,7 +8,11 @@
         CardAddButton(to="/product/create" second="true")
 
 </template>
+<script>
+export default {
+  middleware: 'auth',
+}
+</script>
 
 <style lang="scss" scoped>
-
 </style>

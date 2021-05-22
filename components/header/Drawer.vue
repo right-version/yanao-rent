@@ -17,7 +17,6 @@ import { mainLinks } from './links'
 export default {
   name: 'AppHeader',
   props: ['value'],
-  middleware: 'auth',
   data: () => ({ mainLinks }),
 }
 </script>
