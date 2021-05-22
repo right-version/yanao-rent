@@ -2,7 +2,7 @@
 .product-card
   
   v-hover(v-slot="{ hover }")
-    v-card(flat tile elevation="2" :class="{'hover-card': hover, 'no-amount': !amount}")
+    v-card(flat tile :class="{'hover-card': hover, 'no-amount': !amount}" outlined)
       .image-wrap
         v-img.image(:src="'https://vktrpnzrv.fvds.ru' + photo" height="200px" :class="{hover}")
       
@@ -18,7 +18,7 @@
 
       v-fade-transition
         v-overlay(v-if="hover && !amount" absolute color="#006064")
-          v-chip(color="#ad1457" label) Забронировано
+          v-chip(color="#ad1457" label) Забронировано на сегодня
 
 
 </template>
@@ -50,6 +50,10 @@ export default {
 <style lang="scss" scoped>
 .product-card ::v-deep {
   margin: 2px;
+
+  .v-card {
+    min-height: 405px;
+  }
 
   .hover-card {
     background-color: #fce4ec23;

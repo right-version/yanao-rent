@@ -10,8 +10,19 @@
             v-card.py-3(elevation=3)
               v-expansion-panels(flat multiple v-model="panels")
                 v-expansion-panel
-                  v-expansion-panel-header Item
-                  v-expansion-panel-content Lorem ipsum dolor sit a
+                  v-expansion-panel-header Ваш город
+                  v-expansion-panel-content
+                    v-select
+                v-expansion-panel
+                  v-expansion-panel-header Характеристики товара
+                  v-expansion-panel-content
+                    v-select(label="Категория")
+                    v-select(label="Прокат")
+                    p С залогом - без залога
+                    p Доступные сегодня
+                v-expansion-panel
+                  v-expansion-panel-header Цена от - до
+                  v-expansion-panel-content
 
           v-col(cols=9)
             .d-flex.align-center.justify-space-between
@@ -48,6 +59,7 @@
                   :amount="product.amount"
                   :pledge="product.pledge"
                 )
+              p.ml-3(v-if="formatProducts.length === 0") Ничего не найдено 😢
 
       v-tab-item.mt-5(transition="fade-transition")
 
@@ -75,7 +87,29 @@ export default {
   },
   computed: {
     formatProducts() {
-      return this.products
+      let copy = JSON.parse(JSON.stringify(this.products))
+
+      // Поиск
+      if (this.search) {
+        copy = copy.filter((el) => {
+          return (el.title + ' ' + el.distributor)
+            .toLowerCase()
+            .includes(this.search.toLowerCase())
+        })
+      }
+
+      // Сортировка
+      if (this.selectedItem === 'По популярности') {
+        copy = copy.sort((a, b) => {
+          return b.price - a.price
+        })
+      } else {
+        copy = copy.sort((a, b) => {
+          return a.price - b.price
+        })
+      }
+
+      return copy
     },
   },
 }
