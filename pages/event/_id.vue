@@ -13,6 +13,8 @@
             .mt-2.subtitle-1(v-if="event.event_time") {{ event.event_time.slice(0,-3) }}
             .mt-2.subtitle-1(v-if="address") {{ address }}
 
+          v-btn(color="#00bcd4" tile elevation=0 @click="onClick").ml-4 Я участвую!
+
       h1.mt-8 Подробнее
       div.mt-2.mb-8(v-html="event.description")
       
@@ -52,6 +54,11 @@ export default {
       return x.coords
     },
   },
+  methods: {
+    onClick() {
+      this.$store.commit('alert', { time: 2000, text: '+ 1' })
+    },
+  },
 }
 </script>
 
@@ -61,6 +68,16 @@ export default {
     height: 300px;
     .h-200 {
       height: 300px;
+    }
+  }
+
+  .spb {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .v-btn {
+      width: fit-content !important;
     }
   }
 }

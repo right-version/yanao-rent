@@ -17,7 +17,7 @@
             text
           ) {{ link.title }}
 
-          AuthModal
+          AuthModal.ml-2
 
 </template>
 

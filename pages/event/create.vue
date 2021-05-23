@@ -264,9 +264,12 @@ export default {
       }
       await api.postEvent(this.$axios, formData)
       try {
-        console.log()
         await api.postEvent(this.$axios, formData)
         this.$router.go(-1)
+        this.$store.commit('alert', {
+          time: 4000,
+          text: 'Событие создано 😊',
+        })
       } catch (error) {}
     },
     next(index) {

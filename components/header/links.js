@@ -1,4 +1,1 @@
-export const mainLinks = [
-  { title: 'События', to: '/events' },
-  { title: 'Бизнесу', to: '/business' }
-]
+export const mainLinks = [{ title: 'События', to: '/events' }]

@@ -2,7 +2,6 @@
 v-container.page
   v-tabs
     v-tab Список
-    v-tab На карте
 
     v-tab-item.mt-5.mb-5.ml-1
       .d-flex.align-center.justify-space-between
@@ -42,9 +41,6 @@ v-container.page
             .card__bot.pb-4.pr-4.d-flex.justify-end
               v-btn.butt(color="#f06292" :to="`/event/${event.id}`" tile elevation="0" dark nuxt) Подробнее
 
-
-    v-tab-item.mt-5
-      GoogleMapEvents
 </template>
 
 <script>

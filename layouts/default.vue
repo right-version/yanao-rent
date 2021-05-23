@@ -3,6 +3,10 @@
     HeaderDrawer(v-model="drawer")
     Header(@clickBurger="drawer = true")
 
+    v-snackbar(v-model="snackbar" :timeout="alert") {{ alertText }}
+      template(v-slot:action="{ attrs }")
+        v-btn(color="#f06292" text v-bind="attrs" @click="snackbar = false") Закрыть
+
     v-main
       nuxt
 
@@ -14,7 +18,27 @@ export default {
   data() {
     return {
       drawer: false,
+      snackbar: false,
     }
+  },
+  watch: {
+    alert(value) {
+      if (value && !this.snackbar) {
+        this.snackbar = true
+        setTimeout(() => {
+          this.snackbar = false
+          this.$store.commit('alert', { time: 0, text: '' })
+        }, value)
+      }
+    },
+  },
+  computed: {
+    alert() {
+      return this.$store.state.alert
+    },
+    alertText() {
+      return this.$store.state.alertText
+    },
   },
 }
 </script>

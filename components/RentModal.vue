@@ -144,7 +144,11 @@ export default {
         return
       }
 
-      console.log(this.form)
+      this.dialog = false
+      this.$store.commit('alert', {
+        time: 4000,
+        text: 'Оплата прошла успешно 😊',
+      })
     },
     validate(fields) {
       let total = true

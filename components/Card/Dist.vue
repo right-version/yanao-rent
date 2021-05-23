@@ -41,6 +41,7 @@ export default {
     position: absolute;
     bottom: 60px;
     right: 20px;
+    border-radius: 100% !important;
   }
 }
 </style>

@@ -191,6 +191,10 @@ export default {
       }
       try {
         await api.postProduct(this.$axios, formData)
+        this.$store.commit('alert', {
+          time: 4000,
+          text: 'Продукт опубликован 😊',
+        })
         this.$router.go(-1, { query: 'success' })
       } catch (error) {
         console.error(error)

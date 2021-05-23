@@ -4,8 +4,8 @@
       v-row.mt-4
         v-col(cols=5)
           client-only
-            lightbox.img(css="h-200 h-lg-250" :cells="1" :items="['https://vktrpnzrv.fvds.ru' + product.photo]")
-    
+            lightbox.img(css="h-200 h-lg-250" :cells="3" :items="['https://vktrpnzrv.fvds.ru' + product.photo]")
+
         v-col.spb.mt-4(cols=7)
           .topchick.ml-4
             h2 {{ product.title || 'Название товара' }}
@@ -14,8 +14,7 @@
             .mt-4 Залог: 
               span.pledge &nbsp;{{ product.pledge }} ₽
 
-
-          .d-flex.mt-4.button.ml-4
+          .d-flex.mt-4.button.ml-6
             RentModal(
               :id="product.id"
               :price="product.price"
@@ -41,15 +40,12 @@
               p
                 a(:href="'tel:' + product.distributor.phone" ) {{ product.distributor.phone }}
 
-    
-
     v-container
-      h1.mb-8 На карте
-      GoogleMapMarker(:coords="coords")
+      h1.mb-8(v-if="coords") На карте
+      GoogleMapMarker(v-if="coords" :coords="coords")
 
       h1.mt-8.mb-8 Отзывы
       Comments
-
 
 </template>
 
