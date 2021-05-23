@@ -132,6 +132,7 @@ export default {
       ],
     }
   },
+  middleware: 'myauth',
   data: () => ({
     location: '',
     searchResults: [],

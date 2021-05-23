@@ -16,7 +16,7 @@
 </template>
 <script>
 export default {
-  // middleware: 'auth',
+  middleware: 'myauth',
 }
 </script>
 

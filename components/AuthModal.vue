@@ -1,9 +1,6 @@
 <template lang="pug">
   v-row.auth-modal(justify="center")
-    v-dialog(v-model="dialog" persistent max-width="500px")
-      template(v-slot:activator="{ on, attrs }")
-        v-btn(icon v-bind="attrs" v-on="on")
-          v-icon(color="white" size="34") mdi-account-circle
+    v-dialog(value="true" persistent max-width="500px")
       v-card(v-if="!registartion ")
         v-card-title Вход
         v-card-text
@@ -32,7 +29,7 @@
         v-divider
         v-card-actions
           v-spacer
-          v-btn(text @click="dialog = false")
+          v-btn(text @click="$emit('close')")
             | Назад
           v-btn(color="#f06292" dark @click="login"  elevation=0)
             | Войти
@@ -84,7 +81,7 @@
         v-divider
         v-card-actions
           v-spacer
-          v-btn(text @click="dialog = false")
+          v-btn(text @click="$emit('close')")
             | Назад
           v-btn(color="#f06292" dark @click="login"  elevation=0)
             | Войти
@@ -93,9 +90,9 @@
 
 <script>
 import api from '~/assets/js/api'
+import cookie from '~/assets/js/cookie'
 export default {
   data: () => ({
-    dialog: false,
     registartion: false,
     form: {
       email: '',
@@ -126,25 +123,17 @@ export default {
       return this.$auth.user
     },
   },
-  watch: {
-    dialog(value) {
-      console.log(value, this.user)
-      if (value && this.user) {
-        this.dialog = false
-        this.$router.push('/user/overview')
-      }
-    },
-  },
   methods: {
     login() {
       if (!this.registartion) {
-        this.$auth
-          .loginWith('local', { data: this.form })
+        api
+          .login(this.$axios, this.form)
           .then((response) => {
-            this.$auth.setUserToken(response.data.tokens.access)
-            this.$auth.setUser(response.data)
+            this.$store.commit('setUser', response)
+            localStorage.setItem('xxx', JSON.stringify(response))
+            cookie.set('xxx', JSON.stringify(response))
             this.$router.push('/user/overview')
-            this.dialog = false
+            this.$emit('close')
           })
           .catch((e) => {
             this.formError = e.response.data
@@ -169,22 +158,18 @@ export default {
             email: this.form2.email,
             password: this.form2.password,
           })
-          .then((response) => {
-            console.log(response)
-            this.$auth.setUserToken(response.data.tokens.access)
-
-            this.$auth
-              .loginWith('local', {
-                data: {
-                  email: this.form2.email,
-                  password: this.form2.password,
-                },
+          .then(() => {
+            api
+              .login(this.$axios, {
+                email: this.form2.email,
+                password: this.form2.password,
               })
               .then((response) => {
-                this.$auth.setUserToken(response.data.tokens.access)
-                this.$auth.setUser(response.data)
+                this.$store.commit('setUser', response)
+                localStorage.setItem('xxx', JSON.stringify(response))
+                cookie.set('xxx', JSON.stringify(response))
                 this.$router.push('/user/overview')
-                this.dialog = false
+                this.$emit('close')
               })
           })
           .catch((e) => {

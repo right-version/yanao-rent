@@ -144,6 +144,7 @@ export default {
     } catch (error) {}
     return { distributors, categories }
   },
+  middleware: 'myauth',
   data: () => ({
     rules: [
       (value) => !value || value.length < 15 || 'Не более 15 картинок',

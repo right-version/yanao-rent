@@ -3,6 +3,6 @@ export default {
   middleware: ({ redirect }) => {
     redirect('/user/overview')
   },
-  middleware: 'auth',
+  middleware: 'myauth',
 }
 </script>

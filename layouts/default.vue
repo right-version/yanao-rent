@@ -6,7 +6,7 @@
     v-snackbar(v-model="snackbar" :timeout="alert") {{ alertText }}
       template(v-slot:action="{ attrs }")
         v-btn(color="#f06292" text v-bind="attrs" @click="snackbar = false") Закрыть
-
+  
     v-main
       nuxt
 
@@ -39,6 +39,10 @@ export default {
     alertText() {
       return this.$store.state.alertText
     },
+  },
+  mounted() {
+    const xxx = localStorage.getItem('xxx')
+    this.$store.commit('setUser', JSON.parse(xxx))
   },
 }
 </script>

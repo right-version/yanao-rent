@@ -1,5 +1,6 @@
 <template lang="pug">
   v-app-bar(flat app)
+    AuthModal.absoltely(v-if="modal"  @close="modal=false")
     v-app-bar-nav-icon.hidden-md-and-up(@click="$emit('clickBurger')")
     v-container.py-0.hidden-sm-and-down
       v-row.align-center.justify-space-between
@@ -17,7 +18,9 @@
             text
           ) {{ link.title }}
 
-          AuthModal.ml-2
+          v-btn.ml-2(icon @click="onClick")
+            v-icon(color="white" size="34") mdi-account-circle
+
 
 </template>
 
@@ -25,7 +28,21 @@
 import { mainLinks } from './links'
 export default {
   name: 'AppHeader',
-  data: () => ({ mainLinks }),
+  data: () => ({ mainLinks, modal: false }),
+  computed: {
+    user() {
+      return this.$store.state.user
+    },
+  },
+  methods: {
+    onClick() {
+      if (this.user) {
+        this.$router.push('/user/overview')
+      } else {
+        this.modal = true
+      }
+    },
+  },
 }
 </script>
 
@@ -36,6 +53,12 @@ header {
   background: transparent !important;
   transition: all 0.4s linear;
   backdrop-filter: saturate(180%) blur(20px) !important;
+
+  .absoltely {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
 
   .v-toolbar__content {
     height: 64px !important;

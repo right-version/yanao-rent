@@ -44,30 +44,6 @@ export default {
     credentials: true
   },
 
-  auth: {
-    strategies: {
-      local: {
-        token: {
-          required: true,
-          maxAge: 1800,
-          type: 'jwt'
-        },
-        user: {
-          property: false
-        },
-        endpoints: {
-          login: { url: '/auth/login/', method: 'post' },
-          user: { url: '', method: 'get' }
-        }
-      }
-    },
-    redirect: {
-      login: '/'
-    },
-    // Can work without localStorage !
-    localStorage: false
-  },
-
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
