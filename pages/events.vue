@@ -28,7 +28,7 @@ v-container.page
         elevation="0"
         v-for="(event, index) in formatedEvents"
         :key="'event' + index"
-        tile outlined
+        outlined
       )
         .d-flex
           v-avatar(tile size="200" color="#fce4ec")

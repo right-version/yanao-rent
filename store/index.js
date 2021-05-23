@@ -1,6 +1,8 @@
 export const state = () => ({
   alert: 0,
-  alertText: ''
+  alertText: '',
+
+  user: {}
 })
 
 export const mutations = {

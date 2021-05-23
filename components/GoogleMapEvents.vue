@@ -37,7 +37,7 @@ export default {
           src: `https://maps.googleapis.com/maps/api/js?key=AIzaSyBIbn913V1SW-i2r0YaVtFBAwnxUs6ysW4&libraries=places&fields=name,geometry`,
           defer: true,
           callback: () => this.MapsInit(),
-          hid: 'google-map',
+          hid: 'maps',
         },
       ],
     }
