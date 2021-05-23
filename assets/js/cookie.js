@@ -1,8 +1,6 @@
 export default {
   set(key, value) {
-    
-    document.cookie = `${key}=${value}; domain=${location.hostname};
-      path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT`
+    document.cookie = `${key}=${value}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT`
   },
   get(key, cookies) {
     if (!cookies) return
