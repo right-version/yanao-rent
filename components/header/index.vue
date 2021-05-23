@@ -37,7 +37,7 @@ export default {
   methods: {
     onClick() {
       if (this.user) {
-        this.$router.push('/user/overview')
+        this.$router.push('/user')
       } else {
         this.modal = true
       }

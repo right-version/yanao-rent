@@ -132,7 +132,7 @@ export default {
             this.$store.commit('setUser', response)
             localStorage.setItem('xxx', JSON.stringify(response))
             cookie.set('xxx', JSON.stringify(response))
-            this.$router.push('/user/overview')
+            this.$router.push('/user')
             this.$emit('close')
           })
           .catch((e) => {
@@ -168,7 +168,7 @@ export default {
                 this.$store.commit('setUser', response)
                 localStorage.setItem('xxx', JSON.stringify(response))
                 cookie.set('xxx', JSON.stringify(response))
-                this.$router.push('/user/overview')
+                this.$router.push('/user')
                 this.$emit('close')
               })
           })

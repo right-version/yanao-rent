@@ -22,6 +22,9 @@ export default {
   getDistributors(axios) {
     return axios.$get('/distributor/')
   },
+  postDistributor(axios, data) {
+    return axios.$post('/distributor/', data)
+  },
 
   getEvent(axios) {
     return axios.$get('/event/')
